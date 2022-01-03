@@ -1,6 +1,6 @@
 package com.example.snakegame;
 
 public class Constants {
-    public static int SCREEN_WIDTH;
-    public static int SCREEN_HEIGHT;
-}
+    public static int screenWidth;
+    public static int screenHeight;
+}//end of constants

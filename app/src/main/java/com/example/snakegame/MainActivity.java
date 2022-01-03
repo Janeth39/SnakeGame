@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         DisplayMetrics dm = new DisplayMetrics();
         this.getWindowManager().getDefaultDisplay().getMetrics(dm);
-        Constants.SCREEN_WIDTH = dm.widthPixels;
-        Constants.SCREEN_HEIGHT = dm.heightPixels;
+        Constants.screenWidth = dm.widthPixels;
+        Constants.screenHeight = dm.heightPixels;
         setContentView(R.layout.activity_main);
         img_swipe = findViewById(R.id.img_swipe);
         gv = findViewById(R.id.gv);
@@ -50,13 +50,15 @@ public class MainActivity extends AppCompatActivity {
         txt_dialog_best_score.setText(bestScore + "");
         dialogScore.setCanceledOnTouchOutside(false);
         RelativeLayout rl_start = dialogScore.findViewById(R.id.rl_start);
-        rl_start.setOnClickListener(new View.OnClickListener() {
+        rl_start.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 img_swipe.setVisibility(View.VISIBLE);
                 gv.reset();
                 dialogScore.dismiss();
-            }
+            }//end of onClick
         });
         dialogScore.show();
     }

@@ -41,7 +41,7 @@ public class PartDuck {
     }
 
     public Rect getrTop() {
-        return new Rect(this.x, this.y-10*Constants.SCREEN_HEIGHT/1920, this.x+GameView.sizeElementMap, this.y);
+        return new Rect(this.x, this.y-10*Constants.screenHeight/1920, this.x+GameView.sizeElementMap, this.y);
     }
 
     public void setrTop(Rect rTop) {
@@ -49,7 +49,7 @@ public class PartDuck {
     }
 
     public Rect getrBottom() {
-        return new Rect(this.x, this.y + GameView.sizeElementMap, this.x + GameView.sizeElementMap, this.y + GameView.sizeElementMap+10*Constants.SCREEN_HEIGHT/1920);
+        return new Rect(this.x, this.y + GameView.sizeElementMap, this.x + GameView.sizeElementMap, this.y + GameView.sizeElementMap+10*Constants.screenHeight/1920);
     }
 
     public void setrBottom(Rect rBottom) {
@@ -57,7 +57,7 @@ public class PartDuck {
     }
 
     public Rect getrRight() {
-        return new Rect(this.x + GameView.sizeElementMap, this.y, this.x + GameView.sizeElementMap+10*Constants.SCREEN_WIDTH/1080, this.y+GameView.sizeElementMap);
+        return new Rect(this.x + GameView.sizeElementMap, this.y, this.x + GameView.sizeElementMap+10*Constants.screenWidth/1080, this.y+GameView.sizeElementMap);
     }
 
     public void setrRight(Rect rRight) {
@@ -65,7 +65,7 @@ public class PartDuck {
     }
 
     public Rect getrLeft() {
-        return new Rect(this.x - 10*Constants.SCREEN_WIDTH/1080, this.y, this.x, this.y + GameView.sizeElementMap);
+        return new Rect(this.x - 10*Constants.screenWidth/1080, this.y, this.x, this.y + GameView.sizeElementMap);
     }
 
     public void setrLeft(Rect rLeft) {

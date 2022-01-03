@@ -19,6 +19,7 @@ public class Duck {
         this.bm = bm;
         this.bm2 = bm2;
         this.length = length;
+        //assigns the part of the image facing in different direction to a bitmap variable
         bm_duckL_left = Bitmap.createBitmap(bm, GameView.sizeElementMap-30,20, GameView.sizeElementMap+20,GameView.sizeElementMap+30);
         bm_duckL_up = Bitmap.createBitmap(bm,2*GameView.sizeElementMap+40,0, GameView.sizeElementMap,GameView.sizeElementMap+30);
         bm_duckL_right = Bitmap.createBitmap(bm,4*GameView.sizeElementMap+50,20, GameView.sizeElementMap,GameView.sizeElementMap+30);
@@ -27,94 +28,137 @@ public class Duck {
         bm_duckF_up = Bitmap.createBitmap(bm2,2*GameView.sizeElementMap+10,0, GameView.sizeElementMap,GameView.sizeElementMap);
         bm_duckF_right = Bitmap.createBitmap(bm2,3*GameView.sizeElementMap+60,10, GameView.sizeElementMap,GameView.sizeElementMap);
         bm_duckF_down = Bitmap.createBitmap(bm2,4*GameView.sizeElementMap,0, GameView.sizeElementMap,GameView.sizeElementMap);
-
+        //sets up the duck chain at the beginning of the game
         setMove_right(true);
         arrPartDuck.add(new PartDuck(bm_duckL_right, x, y));
-        for (int i = 1; i < length-1; i++){
+        for (int i = 1; i < length-1; i++)
+        {
             this.arrPartDuck.add(new PartDuck(bm_duckF_right, this.arrPartDuck.get(i-1).getX()-GameView.sizeElementMap, y));
-        }
+        }//end of for loop
         arrPartDuck.add(new PartDuck(bm_duckL_right, arrPartDuck.get(length-2).getX()-GameView.sizeElementMap, arrPartDuck.get(length-2).getY()));
-    }
+    }//end of Duck
 
+    //updates ducks movement
     public void update(){
-        for(int i = length-1; i > 0; i--){
+        for(int i = length-1; i > 0; i--)
+        {
             arrPartDuck.get(i).setX(arrPartDuck.get(i-1).getX());
             arrPartDuck.get(i).setY(arrPartDuck.get(i-1).getY());
-        }
-        if(move_right){
+        }//end of for loop
+        if(move_right)
+        {
             arrPartDuck.get(0).setX(arrPartDuck.get(0).getX()+GameView.sizeElementMap);
             arrPartDuck.get(0).setBm(bm_duckL_right);
-        }else if(move_down){
+        }//end of if statement
+         else if(move_down)
+         {
             arrPartDuck.get(0).setY(arrPartDuck.get(0).getY()+GameView.sizeElementMap);
             arrPartDuck.get(0).setBm(bm_duckL_down);
-        }else if(move_up){
+         }//end of first else if statement
+         else if(move_up)
+         {
             arrPartDuck.get(0).setY(arrPartDuck.get(0).getY()-GameView.sizeElementMap);
             arrPartDuck.get(0).setBm(bm_duckL_up);
-        }else{
+         }//end of second else if statment
+         else
+         {
             arrPartDuck.get(0).setX(arrPartDuck.get(0).getX()-GameView.sizeElementMap);
             arrPartDuck.get(0).setBm(bm_duckL_left);
-        }
-        for (int i = 1; i < length - 1; i++){
+         }//end of else statement
+        for (int i = 1; i < length - 1; i++)
+        {
             if(arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i+1).getrBody())
                     && arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i-1).getrBody())
                     || arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i+1).getrBody())
-                    && arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i-1).getrBody())){
+                    && arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i-1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_left);
-            }else if (arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i+1).getrBody())
+            }//end of if statement
+            else if (arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i+1).getrBody())
                     && arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i-1).getrBody())
                     || arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i-1).getrBody())
-                    && arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i+1).getrBody())){
+                    && arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i+1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_left);
-            }else if (arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i+1).getrBody())
+            }//end of else if statement
+            else if (arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i+1).getrBody())
                     && arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i-1).getrBody())
                     || arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i-1).getrBody())
-                    && arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i+1).getrBody())) {
+                    && arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i+1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_right);
-            }else if(arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i+1).getrBody())
+            }//end of else if statement
+            else if(arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i+1).getrBody())
                     && arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i-1).getrBody())
                     || arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i-1).getrBody())
-                    && arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i+1).getrBody())){
+                    && arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i+1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_right);
-            }else if(arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i-1).getrBody())
-                    && arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i+1).getrBody())){
+            }//end of else if statement
+            else if(arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i-1).getrBody())
+                    && arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i+1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_left);
-            } else if(arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i+1).getrBody())
-                    && arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i-1).getrBody())){
+            }//end of else if statement
+            else if(arrPartDuck.get(i).getrLeft().intersect(arrPartDuck.get(i+1).getrBody())
+                    && arrPartDuck.get(i).getrRight().intersect(arrPartDuck.get(i-1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_right);
-            } else if(arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i-1).getrBody())
-                    &&arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i+1).getrBody())){
+            }//end of else if
+            else if(arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i-1).getrBody())
+                    &&arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i+1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_up);
-            }else if(arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i+1).getrBody())
-                    &&arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i-1).getrBody())){
+            }//end of else if
+            else if(arrPartDuck.get(i).getrTop().intersect(arrPartDuck.get(i+1).getrBody())
+                    &&arrPartDuck.get(i).getrBottom().intersect(arrPartDuck.get(i-1).getrBody()))
+            {
                 arrPartDuck.get(i).setBm(bm_duckF_down);
-            }else{
-                if(move_right){
+            }//end of else if statement
+            else
+            {
+                if(move_right)
+                {
                     arrPartDuck.get(i).setBm(bm_duckF_right);
-                }else if(move_down){
+                }//end of if statement
+                else if(move_down)
+                {
                     arrPartDuck.get(i).setBm(bm_duckF_down);
-                }else if(move_up){
+                }//end of else if statement
+                else if(move_up)
+                {
                     arrPartDuck.get(i).setBm(bm_duckF_up);
-                }else{
+                }//end of else if statement
+                else
+                {
                     arrPartDuck.get(i).setBm(bm_duckF_left);
-                }
-            }
-        }
-        if(arrPartDuck.get(length-1).getrRight().intersect(arrPartDuck.get(length-2).getrBody())){
+                }//end of inner else statement
+            }//end of outer else statement
+        }//end of for loop
+        if(arrPartDuck.get(length-1).getrRight().intersect(arrPartDuck.get(length-2).getrBody()))
+        {
             arrPartDuck.get(length-1).setBm(bm_duckL_right);
-        }else if(arrPartDuck.get(length-1).getrLeft().intersect(arrPartDuck.get(length-2).getrBody())){
+        }//end of if statement
+        else if(arrPartDuck.get(length-1).getrLeft().intersect(arrPartDuck.get(length-2).getrBody()))
+        {
             arrPartDuck.get(length-1).setBm(bm_duckL_left);
-        }else if(arrPartDuck.get(length-1).getrBottom().intersect(arrPartDuck.get(length-2).getrBody())){
+        }//end of else if statement
+        else if(arrPartDuck.get(length-1).getrBottom().intersect(arrPartDuck.get(length-2).getrBody()))
+        {
             arrPartDuck.get(length-1).setBm(bm_duckL_down);
-        }else{
+        }//end of else if
+        else
+        {
             arrPartDuck.get(length-1).setBm(bm_duckL_up);
-        }
-    }
+        }//end of else statement
+    }//end of update
 
     public void drawSnake(Canvas canvas){
-        for(int i = length-1; i >= 0; i--){
+        for(int i = length-1; i >= 0; i--)
+        {
             canvas.drawBitmap(arrPartDuck.get(i).getBm(), arrPartDuck.get(i).getX(), arrPartDuck.get(i).getY(), null);
-        }
-    }
+        }//end of for loop
+    }//end of drawSnake
 
     public Bitmap getBm() {
         return bm;
@@ -255,17 +299,25 @@ public class Duck {
         this.move_up = false;
     }
 
+    //adds another duck when it comes in contact with the food image
     public void addPart() {
         PartDuck p = this.arrPartDuck.get(length-1);
         this.length += 1;
-        if(p.getBm()==bm_duckL_right){
+        if(p.getBm()==bm_duckL_right)
+        {
             this.arrPartDuck.add(new PartDuck(bm_duckL_right, p.getX()-GameView.sizeElementMap, p.getY()));
-        }else if(p.getBm()==bm_duckL_left){
+        }//end of if statement
+        else if(p.getBm()==bm_duckL_left)
+        {
             this.arrPartDuck.add(new PartDuck(bm_duckL_left, p.getX()+GameView.sizeElementMap, p.getY()));
-        }else if(p.getBm()==bm_duckL_up){
+        }//end of else if statement
+        else if(p.getBm()==bm_duckL_up)
+        {
             this.arrPartDuck.add(new PartDuck(bm_duckL_up, p.getX(), p.getY()+GameView.sizeElementMap));
-        }else if(p.getBm()==bm_duckL_down){
+        }//end of else if statement
+        else if(p.getBm()==bm_duckL_down)
+        {
             this.arrPartDuck.add(new PartDuck(bm_duckL_up, p.getX(), p.getY()-GameView.sizeElementMap));
-        }
-    }
-}
+        }//end of else if statement
+    }//end of addPart
+}//end of Duck
